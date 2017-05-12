@@ -24,9 +24,21 @@ namespace MainMenu
             {
                 case "reservation bot":
                     reply.Text = $"here are some reservations";
+                    var heroCardAttachment = new HeroCard
+                    {
+                        Title = "Reservation bot",
+                        Text = "Displayed from Direct Line"
+                    }.ToAttachment();
+                    reply.Attachments.Add(heroCardAttachment);
                     break;
                 case "form bot":
                     reply.Text = $"here are some forms";
+                    var formbotAttachment = new HeroCard
+                    {
+                        Title = "Form bot",
+                        Text = "Displayed in the DirectLine client"
+                    }.ToAttachment();
+                    reply.Attachments.Add(formbotAttachment);
                     break;
                 default:
                     reply.Text = $"you said '{message.ToString()}'";

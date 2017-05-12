@@ -2,6 +2,7 @@
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.Luis;
 using Microsoft.Bot.Builder.Luis.Models;
+using Microsoft.Bot.Connector;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -32,6 +33,29 @@ namespace ConferenceRoomReservationBot
         {
             await context.PostAsync("Confirmation"); 
             context.Wait(MessageReceived);
+        }
+
+        [LuisIntent("ListBots")]
+        public async Task ListBotIntent(IDialogContext context, LuisResult result)
+        {
+            await context.PostAsync("At List bots");
+            context.Wait(this.MessageReceived);
+        }
+
+        private void ShowOptions(IDialogContext context)
+        {
+            PromptDialog.Choice(context, this.OnOptionSelected, new List<string>() { "Reservation", "Form Bot" }, "Bot Options", "Not a valid option", 3);
+        }
+
+        private Task OnOptionSelected(IDialogContext context, IAwaitable<string> result)
+        {
+            throw new NotImplementedException();
+        }
+
+        public virtual async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> result)
+        {
+            var message = await result;
+            this.ShowOptions(context);
         }
 
         [LuisIntent("ConfirmOrDeny")]

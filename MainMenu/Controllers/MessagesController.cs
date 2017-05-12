@@ -20,6 +20,7 @@ namespace MainMenu
         {
             if (activity.Type == ActivityTypes.Message)
             {
+                //await Conversation.SendAsync(activity, () => new ReservationLuisDialog());
                 await Conversation.SendAsync(activity, () => new DirectLine());
             }
             else
@@ -39,13 +40,13 @@ namespace MainMenu
             }
             else if (message.Type == ActivityTypes.ConversationUpdate)
             {
-                ConnectorClient client = new ConnectorClient(new Uri(message.ServiceUrl));
+                //ConnectorClient client = new ConnectorClient(new Uri(message.ServiceUrl));
 
-                var reply = message.CreateReply();
+                //var reply = message.CreateReply();
 
-                reply.Text = "Welcome to the Bot to showcase the DirectLine API.";
+                //reply.Text = "Welcome to the Bot to showcase the DirectLine API.";
 
-                await client.Conversations.ReplyToActivityAsync(reply);
+                //await client.Conversations.ReplyToActivityAsync(reply);
             }
             else if (message.Type == ActivityTypes.ContactRelationUpdate)
             {
